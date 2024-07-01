@@ -9,7 +9,7 @@ import UIKit
 
 class CarouselView: UIView {
     
-    var carouselImages = [UIImage]()
+    var carouselImages = [UIImage(named: "travel_placeholder")]//[UIImage]()
     
     // MARK: - Subviews
     
@@ -21,20 +21,27 @@ class CarouselView: UIView {
         collection.delegate = self
         collection.register(CarouselCell.self, forCellWithReuseIdentifier: CarouselCell.cellId)
         collection.backgroundColor = .clear
+//        collection.layer.cornerRadius = 30
+//        collection.layer.masksToBounds = true
+//        collection.clipsToBounds = true
         return collection
     }()
     
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        if (self.traitCollection.userInterfaceStyle == .dark)
-        {
-            pageControl.pageIndicatorTintColor = .gray
-            pageControl.currentPageIndicatorTintColor = .white
-        } else
-        {
-            pageControl.pageIndicatorTintColor = .lightGray
-            pageControl.currentPageIndicatorTintColor = .black
-        }
+//        if (self.traitCollection.userInterfaceStyle == .dark)
+//        {
+//            pageControl.pageIndicatorTintColor = .gray
+//            pageControl.currentPageIndicatorTintColor = .white
+//        } else
+//        {
+//            pageControl.pageIndicatorTintColor = .lightGray
+//            pageControl.currentPageIndicatorTintColor = .black
+//        }
+
+        pageControl.pageIndicatorTintColor = .gray
+        pageControl.currentPageIndicatorTintColor = .white
+        
         return pageControl
     }()
     
@@ -62,7 +69,7 @@ class CarouselView: UIView {
         super.layoutSubviews()
         //print(frameCell)
         //self.frame = frameCell//CGRect(x: 0, y: 40, width: frameCell.width, height: 300)
-        carouselCollectionView.frame = CGRect(x: 0, y: 50, width: frameCell.width, height: 400)
+        carouselCollectionView.frame = CGRect(x: 0, y: 0, width: self.bounds.width , height: self.bounds.height-25)//CGRect(x: 0, y: 50, width: frameCell.width, height: 400)
     }
     
     required init?(coder: NSCoder) {
@@ -163,10 +170,10 @@ extension CarouselView {
         carouselCollectionView.reloadData()
     }
     
-    public func colorModeChanged(color: UIColor)
-    {
-        pageControl.currentPageIndicatorTintColor = color
-    }
+//    public func colorModeChanged(color: UIColor)
+//    {
+//        pageControl.currentPageIndicatorTintColor = color
+//    }
     
     public func pageControlIsHidden(bool: Bool)
     {

@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import ImagePicker
 
 protocol AddViewControllerDelegate: AnyObject {
     func addViewControllerAddImage(image: UIImage)
@@ -27,9 +28,40 @@ protocol AddViewControllerWillMoveDelegate: AnyObject
     func removeImages()
 }
 
-class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MapViewControllerDelegate {
+class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MapViewControllerDelegate, ImagePickerDelegate {
     
-    var images: [UIImage] = [UIImage]()
+    func wrapperDidPress(_ imagePicker: ImagePicker.ImagePickerController, images: [UIImage]) {
+        DispatchQueue.main.async {
+            imagePicker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePicker.ImagePickerController, images: [UIImage]) {
+        DispatchQueue.main.async {
+            images.forEach
+            { image in
+                
+                    self.images_.append(image)
+                    self.delegateForPicture?.addPictureToMain(image: image)
+                    self.delegate?.addViewControllerAddImage(image: image)
+                
+            }
+            
+            self.imageSelected = true
+            self.createPostButton.isEnabled = self.shouldCreatePost()
+            imagePicker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePicker.ImagePickerController) {
+        DispatchQueue.main.async {
+            self.backToMain()
+            imagePicker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
+    var images_: [UIImage] = [UIImage]()
     
     let imagePicker = UIImagePickerController()
     
@@ -57,7 +89,11 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.register(CollectionTableViewCell.self, forCellReuseIdentifier: CollectionTableViewCell.identifier)
-        tableView.backgroundColor = .systemBackground
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TitleCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "LocationCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DateCell")
+        tableView.backgroundColor = .backgroundMain
+        tableView.separatorColor = .secondary
         return tableView
     }()
     
@@ -65,30 +101,51 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     {
         let button = UIButton()
         button.isEnabled = false
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.configuration = .filled()
         button.configuration?.title = "Create Post"
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.overrideUserInterfaceStyle = .dark
+        
         return button
     }()
+    
+    init(images: [UIImage]) {
+        self.images_ = images
+        super.init(nibName: nil, bundle: nil)
+        DispatchQueue.main.async {
+            images.forEach
+            { image in
+                self.delegateForPicture?.addPictureToMain(image: image)
+                self.delegate?.addViewControllerAddImage(image: image)
+            }
+            self.imageSelected = true
+            self.createPostButton.isEnabled = self.shouldCreatePost()
+        }
+        
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         textInput.tag = 0
         dateTextInput.tag = 1
         textInput.autocorrectionType = .no
         dismissKeyboard()
-        //navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
-        view.backgroundColor = .blue
+        view.backgroundColor = .backgroundMain
         tableView.frame = view.bounds
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         view.addSubview(tableView)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular, scale: .large)), style: .done, target: self, action: #selector(addPicture))
-        navigationItem.rightBarButtonItem?.tintColor = .label
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22, weight: .regular, scale: .large)), style: .done, target: self, action: #selector(addPicture))
+//        navigationItem.rightBarButtonItem?.tintColor = .label
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 23, weight: .regular, scale: .default)), style: .done, target: self, action: #selector(backToMain))
-        navigationItem.leftBarButtonItem?.tintColor = .label
+        navigationItem.leftBarButtonItem?.tintColor = .white
         //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPicture))
         
         
@@ -110,7 +167,7 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     @objc func backToMain()
     {
-        images.removeAll()
+        images_.removeAll()
         delegateRemovePictures?.removeImages()
         navigationController?.popViewController(animated: true)
     }
@@ -120,39 +177,50 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         delegateForMain?.fromAddToMainController(cityName: AddViewController.cityName, countryName: AddViewController.countryName, travelName: textInput.text, date: dateTextInput.text)
         navigationController?.popViewController(animated: true)
     }
-        
-    @objc func addPicture() {
-        self.imagePicker.delegate = self
-        self.imagePicker.allowsEditing = false
-        self.imagePicker.mediaTypes = ["public.image"]
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.present(self.imagePicker, animated: true, completion: nil)
-        }
-    }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            
-            if info[.mediaType] as? String == "public.image" {
-                self.handlePhoto(info)
-            }
-        
-            DispatchQueue.main.async { [weak self] in
-                self?.dismiss(animated: true, completion: nil)
-            }
-    }
+//    @objc func addPicture() {
+//        let pickerConfiguration = PickerConfiguration()
+//        pickerConfiguration.doneButtonTitle = "Finish"
+//        pickerConfiguration.noImagesTitle = "Sorry! There are no images here!"
+//        pickerConfiguration.recordLocation = false
+//        pickerConfiguration.allowVideoSelection = true
+//
+//        let imagePicker = ImagePickerController(pickerConfiguration: pickerConfiguration)
+//        imagePicker.delegate = self
+//
+//        present(imagePicker, animated: true, completion: nil)
+//        
+////        self.imagePicker.delegate = self
+////        self.imagePicker.allowsEditing = false
+////        self.imagePicker.mediaTypes = ["public.image"]
+////        
+////        DispatchQueue.main.async { [weak self] in
+////            guard let self = self else { return }
+////            self.present(self.imagePicker, animated: true, completion: nil)
+////        }
+//    }
     
-    private func handlePhoto(_ info: [UIImagePickerController.InfoKey : Any]) {
-
-        if let image = info[.originalImage] as? UIImage {
-            images.append(image)
-            delegateForPicture?.addPictureToMain(image: image)
-            delegate?.addViewControllerAddImage(image: image)
-            imageSelected = true
-            createPostButton.isEnabled = shouldCreatePost()
-        }
-    }
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//            
+//            if info[.mediaType] as? String == "public.image" {
+//                self.handlePhoto(info)
+//            }
+//        
+//            DispatchQueue.main.async { [weak self] in
+//                self?.dismiss(animated: true, completion: nil)
+//            }
+//    }
+    
+//    private func handlePhoto(_ info: [UIImagePickerController.InfoKey : Any]) {
+//
+//        if let image = info[.originalImage] as? UIImage {
+//            images_.append(image)
+//            delegateForPicture?.addPictureToMain(image: image)
+//            delegate?.addViewControllerAddImage(image: image)
+//            imageSelected = true
+//            createPostButton.isEnabled = shouldCreatePost()
+//        }
+//    }
     
     private func shouldCreatePost() -> Bool
     {
@@ -163,6 +231,8 @@ class AddViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     {
         coordinatesDefined = true
         createPostButton.isEnabled = shouldCreatePost()
+        tableView.reloadData()
+        
     }
     
 
@@ -191,13 +261,23 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource
             cell = cell_
 
         case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "TitleCell", for: indexPath)
+            
+            
+            let attributes = [
+                NSAttributedString.Key.font :  UIFont.systemFont(ofSize: 19),
+                NSAttributedString.Key.foregroundColor: UIColor.secondary
+            ]
             
             textInput.placeholder = "Travel Name"
+            textInput.attributedPlaceholder = NSAttributedString(string: "Travel Name", attributes: attributes)
             textInput.borderStyle = .none
             textInput.textAlignment = .left
             textInput.contentVerticalAlignment = .top
             textInput.delegate = self
+            textInput.textColor = .white
+            textInput.tintColor = .white
+            
             
             let separatorView = UIView.init(frame: CGRect(x: 0, y: cell.frame.size.height - 5, width: cell.frame.size.width, height: 1))
             separatorView.backgroundColor = tableView.separatorColor//UIColor(red: 224, green: 224, blue: 224)
@@ -218,33 +298,49 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource
             cell.separatorInset = UIEdgeInsets(top: 1, left: 0, bottom: 1, right: 0)
             
         case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell", for: indexPath)
+//            guard let cell_ = tableView.dequeueReusableCell(withIdentifier: LocationCell.identifier, for: indexPath) as? LocationCell else {
+//                return UITableViewCell()
+//            }
             
-            //button.configuration?.title = "Add Location"
-            //button.configuration?.image = UIImage(systemName: "mappin.and.ellipse")
-            //button.addTarget(self, action: #selector(switchToMap), for: .touchUpInside)
+            let disclosureImage = UIImage(systemName: "chevron.right")?.withTintColor(.secondary, renderingMode: .alwaysOriginal)
             
-//            let mapImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: cell.bounds.height))
-//            mapImageView.image = UIImage(systemName: "mappin.and.ellipse", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default))
-//            mapImageView.contentMode = .scaleAspectFit
-//            mapImageView.tintColor = .label
+            cell.accessoryView = UIImageView(image: disclosureImage)
             
-            cell.accessoryType = .disclosureIndicator
+            //cell.accessoryType = .disclosureIndicator
+        
             cell.imageView?.image = UIImage(systemName: "map", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default))
-            cell.imageView?.tintColor = .label
-            cell.textLabel?.text = "Add Location"
+            cell.imageView?.tintColor = .white
+            
+            
+            
+            if let cityName = AddViewController.cityName, let countryName = AddViewController.countryName
+            {
+                cell.textLabel?.text =  "\(cityName), \(countryName)"
+            }
+            else
+            {
+                cell.textLabel?.text = "Add Location"
+            }
+            
             
         case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "DateCell", for: indexPath)
             
             
             cell.imageView?.image = UIImage(systemName: "calendar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default))
-            cell.imageView?.tintColor = .label
+            cell.imageView?.tintColor = .white
             
             dateTextInput.placeholder = "13 June 2020"
+            dateTextInput.attributedPlaceholder = NSAttributedString( 
+                string: "13 June 2020",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.secondary]
+            )
             dateTextInput.borderStyle = .none
             dateTextInput.textAlignment = .left
             dateTextInput.delegate = self
+            dateTextInput.textColor = .white
+            dateTextInput.tintColor = .white
             
             let toolbar = UIToolbar()
             toolbar.sizeToFit()
@@ -276,6 +372,11 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         cell.selectionStyle = .none
+        cell.backgroundColor = .backgroundMain
+        cell.textLabel?.tintColor = .white
+        cell.textLabel?.textColor = .white
+        
+        cell.tintColor = .white
         return cell
     }
     
@@ -288,18 +389,6 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource
         dateTextInput.text = formatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
-    
-    
-    
-    
-//    @objc func switchToMap()
-//    {
-//        navigationController?.pushViewController(MapViewController(), animated: true)
-//        if let mapController = navigationController?.topViewController as? MapViewController
-//        {
-//            mapController.delegate = self
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -326,15 +415,6 @@ extension AddViewController: UITableViewDelegate, UITableViewDataSource
             }
         }
     }
-    
-    
-//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        guard let header = view as? UITableViewHeaderFooterView else {return}
-//        header.textLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-//        header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 20, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
-//        header.textLabel?.textColor = .black
-//        
-//    }
     
 }
 

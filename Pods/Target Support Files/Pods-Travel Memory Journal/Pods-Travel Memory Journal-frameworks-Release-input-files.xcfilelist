@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-Travel Memory Journal/Pods-Travel Memory Journal-frameworks.sh
+${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework
+${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
+${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework

@@ -1,0 +1,26 @@
+PODS:
+  - ImagePicker (3.2.0)
+  - Realm (10.47.0):
+    - Realm/Headers (= 10.47.0)
+  - Realm/Headers (10.47.0)
+  - RealmSwift (10.47.0):
+    - Realm (= 10.47.0)
+
+DEPENDENCIES:
+  - ImagePicker
+  - RealmSwift
+
+SPEC REPOS:
+  trunk:
+    - ImagePicker
+    - Realm
+    - RealmSwift
+
+SPEC CHECKSUMS:
+  ImagePicker: 1d950bbb2422548ed58791b4ec7f42fe42920511
+  Realm: e43fb540ae947497e3ea8a662443256920602060
+  RealmSwift: 8b06ed06b5d16749ae0c4d91c0cba414a9e28189
+
+PODFILE CHECKSUM: b772080f9aab6f6731106b7e2bde5f6f942f4381
+
+COCOAPODS: 1.15.2

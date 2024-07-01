@@ -6,11 +6,10 @@
 //
 
 import UIKit
+import ImagePicker
 
 class Post : Codable
 {
-    //@objc dynamic var images: [UIImage] = [UIImage]()
-    //@objc dynamic var images: [Images] = [Images]()
     var city: String?
     var country: String?
     var travelName: String?
@@ -24,7 +23,8 @@ class Post : Codable
     }
 }
 
-class MainViewController: UIViewController, AddViewControllerDelegateForMain, CarouselTableViewCellDelegateDelete, AddViewControllerDelegateForPicture, AddViewControllerWillMoveDelegate {
+class MainViewController: UIViewController, AddViewControllerDelegateForMain, CarouselTableViewCellDelegateDelete, AddViewControllerDelegateForPicture, AddViewControllerWillMoveDelegate, ImagePickerDelegate {
+    
     
     var posts = [Post]()
     var PostImages = [[UIImage]]()
@@ -48,12 +48,13 @@ class MainViewController: UIViewController, AddViewControllerDelegateForMain, Ca
     }()
 
     lazy var tableHeaderView: UIView = {
-        let tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height:44.0)))
+        let tableHeaderView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height:60)))
         tableHeaderView.addSubview(titleStackView)
         titleStackView.leadingAnchor.constraint(equalTo: tableHeaderView.leadingAnchor, constant: 16.0).isActive = true
         titleStackView.topAnchor.constraint(equalTo: tableHeaderView.topAnchor).isActive = true
         titleStackView.trailingAnchor.constraint(equalTo: tableHeaderView.trailingAnchor, constant: -16.0).isActive = true
-        titleStackView.bottomAnchor.constraint(equalTo: tableHeaderView.bottomAnchor).isActive = true
+        //titleStackView.bottomAnchor.constraint(equalTo: tableHeaderView.bottomAnchor).isActive = true
+        titleStackView.backgroundColor = .backgroundMain
         return tableHeaderView
     }()
     
@@ -62,7 +63,7 @@ class MainViewController: UIViewController, AddViewControllerDelegateForMain, Ca
         let tableView = UITableView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.register(CarouselTableViewCell.self, forCellReuseIdentifier: CarouselTableViewCell.identifier)
-        tableView.backgroundColor = .systemBackground
+        tableView.backgroundColor = .backgroundMain
         return tableView
     }()
     
@@ -93,6 +94,13 @@ class MainViewController: UIViewController, AddViewControllerDelegateForMain, Ca
 //            }
 //        }
         
+
+//        let gradient = CAGradientLayer()
+//
+//        gradient.frame = view.bounds
+//        gradient.colors = [UIColor.blue.cgColor, UIColor.systemPink.cgColor]
+//        
+//        view.layer.addSublayer(gradient)
         
         DispatchQueue.global().async {
             
@@ -130,13 +138,13 @@ class MainViewController: UIViewController, AddViewControllerDelegateForMain, Ca
         // MARK: Navigation Bar Configuration
         title = nil
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.backgroundColor = .systemBackground
-        navigationController?.setStatusBar(backgroundColor: .systemBackground)
+        navigationController?.navigationBar.backgroundColor = .backgroundMain
+        navigationController?.setStatusBar(backgroundColor: .backgroundMain)
         navigationController?.navigationBar.shadowImage = UIImage()
         tableView.tableHeaderView = tableHeaderView
         
         self.navigationItem.setHidesBackButton(true, animated: true)
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .backgroundMain
         
         titleStackView.button.addTarget(self, action: #selector(firstAddButtonTapped), for: .touchUpInside)
         
@@ -151,12 +159,60 @@ class MainViewController: UIViewController, AddViewControllerDelegateForMain, Ca
     
     @objc func firstAddButtonTapped()
     {
-        navigationController?.pushViewController(AddViewController(), animated: true)
+        let pickerConfiguration = PickerConfiguration()
+        pickerConfiguration.doneButtonTitle = "Done"
+        pickerConfiguration.noImagesTitle = "Sorry! There are no images here!"
+        pickerConfiguration.recordLocation = false
+        pickerConfiguration.allowVideoSelection = true
+
+        let imagePicker = ImagePickerController(pickerConfiguration: pickerConfiguration)
+        imagePicker.delegate = self
+
+        present(imagePicker, animated: true, completion: nil)
+        
+//        navigationController?.pushViewController(AddViewController(), animated: true)
+//        if let addController = navigationController?.topViewController as? AddViewController
+//        {
+//            addController.delegateForPicture = self
+//            addController.delegateForMain = self
+//            addController.delegateRemovePictures = self
+//        }
+    }
+    
+    func wrapperDidPress(_ imagePicker: ImagePicker.ImagePickerController, images: [UIImage]) {
+        DispatchQueue.main.async {
+            imagePicker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePicker.ImagePickerController, images: [UIImage]) {
+        if let navigationController = navigationController {
+            let imagesToPass = images // Your array of images to pass
+            let addViewController = AddViewController(images: imagesToPass)
+            addViewController.delegateForPicture = self
+            addViewController.delegateForMain = self
+            addViewController.delegateRemovePictures = self
+            navigationController.pushViewController(addViewController, animated: true)
+        }
+        imagePicker.dismiss(animated: true, completion: nil)
+        
+        /*
+        navigationController?.pushViewController(AddViewController(images: images, imageSelected: true), animated: true)
         if let addController = navigationController?.topViewController as? AddViewController
         {
             addController.delegateForPicture = self
             addController.delegateForMain = self
             addController.delegateRemovePictures = self
+        }
+            
+        imagePicker.dismiss(animated: true, completion: nil)
+         */
+        
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePicker.ImagePickerController) {
+        DispatchQueue.main.async {
+            imagePicker.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -176,12 +232,7 @@ class MainViewController: UIViewController, AddViewControllerDelegateForMain, Ca
         posts[0].country = countryName
         posts[0].travelName = travelName
         posts[0].date = date
-        
-//        DispatchQueue.global().async {
-//            self.savePostItems(items: self.posts, key: "posts")
-//            self.saveArrayOfArrays(imagesArrays: self.PostImages, filename: "PostImages")
-//        }
-        
+    
         noPostLabel.isHidden = true
         let indexPath = IndexPath(row: 0, section: 0)
         self.tableView.beginUpdates()
@@ -200,39 +251,20 @@ class MainViewController: UIViewController, AddViewControllerDelegateForMain, Ca
             self.savePostItems(items: self.posts, key: "posts")
             self.saveArrayOfArrays(imagesArrays: self.PostImages, filename: "PostImages")
         }
-//        var post = Post()
-//        post.images = imagesForPost
-//        post.city = cityName
-//        post.country = countryName
-//        post.travelName = travelName
-//        post.date = date
-//        posts.insert(post, at: 0)
-//        noPostLabel.isHidden = true
-//        
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        self.tableView.beginUpdates()
-//        DispatchQueue.main.async {
-//            self.tableView.insertRows(at: [indexPath], with: .automatic)
-//            //self.tableView.reloadData()
-//            self.tableView.endUpdates()
-//        }
-//        
-//        imagesForPost.removeAll()
-        
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        for carouselView in carouselDict.keys
-        {
-            if (traitCollection.userInterfaceStyle == .dark)
-            {
-                carouselView.colorModeChanged(color: .white)
-            } else
-            {
-                carouselView.colorModeChanged(color: .black)
-            }
-        }
-    }
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        for carouselView in carouselDict.keys
+//        {
+//            if (traitCollection.userInterfaceStyle == .dark)
+//            {
+//                carouselView.colorModeChanged(color: .white)
+//            } else
+//            {
+//                carouselView.colorModeChanged(color: .black)
+//            }
+//        }
+//    }
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource
@@ -256,17 +288,25 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
             cell.configureUserImageView(travelName: travelName)
             cell.configureLocationLabel(cityName: cityName, countryName: countryName)
             cell.deleteButton.postIndex = indexPath.row
-            //cell.shareButton.images = self.posts[self.posts.count - 2 - indexPath.row].images as! [UIImage]
+//            cell.shareButton.images = self.posts[self.posts.count - 2 - indexPath.row].images as! [UIImage]
             cell.shareButton.images = self.PostImages[self.posts.count - 2 - indexPath.row]
             cell.delegateDelete = self
             cell.shareButton.addTarget(self, action: #selector(self.shareImages(_:)), for: .touchUpInside)
 //            cell.configureCarouselView(pageCount: self.imagesForPost.count, frame: CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y, width: cell.frame.width, height: cell.frame.height-200), carouselImages: self.imagesForPost)
             //cell.configureCarouselView(pageCount: self.posts[indexPath.row + 1].images.count, frame: CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y, width: cell.frame.width, height: cell.frame.height-200), carouselImages: (self.posts[indexPath.row + 1].images as! [UIImage]))
-            cell.configureCarouselView(pageCount: self.PostImages[indexPath.row + 1].count, frame: CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y, width: cell.frame.width, height: cell.frame.height-200), carouselImages: self.PostImages[indexPath.row + 1])
+            
+            
+            cell.configureCarouselView(pageCount: self.PostImages[indexPath.row + 1].count, frame: CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y, width: cell.frame.width-20, height: cell.frame.height-200), carouselImages: self.PostImages[indexPath.row + 1])
+            
+//            cell.configureCarouselView(pageCount: self.PostImages[indexPath.row + 1].count, carouselImages: self.PostImages[indexPath.row + 1])
+            
+            
             self.carouselDict[cell.carouselView] = cell.carouselImages
             
         }
         cell.selectionStyle = .none
+        cell.backgroundColor = .backgroundMain
+        
         return cell
     }
 
@@ -277,12 +317,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let maxTitlePoint = tableView.convert(CGPoint(x: titleStackView.titleLabel.bounds.minX, y: titleStackView.titleLabel.bounds.maxY), from: titleStackView.titleLabel)
         title = scrollView.contentOffset.y > maxTitlePoint.y ? "Travel Memory Journal" : nil
+        scrollView.backgroundColor = .backgroundMain
+        
     }
+    
+    
     
     @objc func shareImages(_ sender: ShareButton)
     {
         let vc = UIActivityViewController(activityItems: sender.images, applicationActivities: [])
-//        vc.popoverPresentationController?
         present(vc, animated: true)
     }
     

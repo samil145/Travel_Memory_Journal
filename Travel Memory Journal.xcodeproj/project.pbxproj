@@ -7,23 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		403D785416EB731B5CA01CFA /* Pods_Travel_Memory_Journal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 702B1A4C0FB1B5720BD7EF7A /* Pods_Travel_Memory_Journal.framework */; };
+		BE4DEF9C2B60380C00FD2606 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4DEF9B2B60380C00FD2606 /* MainViewController.swift */; };
+		BE4DEF9E2B60A53400FD2606 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4DEF9D2B60A53400FD2606 /* AddViewController.swift */; };
+		BE4EE8B62B71613F00082901 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4EE8B52B71613F00082901 /* CarouselView.swift */; };
+		BE4EE8B82B71617A00082901 /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4EE8B72B71617A00082901 /* CarouselCell.swift */; };
+		BE8B117A2B6BFC2200D64E84 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8B11792B6BFC2200D64E84 /* MapViewController.swift */; };
+		BEBD7D862B6FBCBA00DBF378 /* TitleStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBD7D852B6FBCBA00DBF378 /* TitleStackView.swift */; };
+		BEC938362B725686000D248C /* CarouselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC938352B725686000D248C /* CarouselTableViewCell.swift */; };
+		BECD165E2B66F26E000F03D2 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD165D2B66F26E000F03D2 /* CollectionTableViewCell.swift */; };
+		BECD16602B66F302000F03D2 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECD165F2B66F302000F03D2 /* CollectionViewCell.swift */; };
 		BECE6EC92B5F0FAF00A84DE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECE6EC82B5F0FAF00A84DE3 /* AppDelegate.swift */; };
 		BECE6ECB2B5F0FAF00A84DE3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECE6ECA2B5F0FAF00A84DE3 /* SceneDelegate.swift */; };
-		BECE6ECD2B5F0FAF00A84DE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECE6ECC2B5F0FAF00A84DE3 /* ViewController.swift */; };
-		BECE6ED02B5F0FAF00A84DE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BECE6ECE2B5F0FAF00A84DE3 /* Main.storyboard */; };
+		BECE6ECD2B5F0FAF00A84DE3 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECE6ECC2B5F0FAF00A84DE3 /* TutorialViewController.swift */; };
 		BECE6ED22B5F0FB000A84DE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BECE6ED12B5F0FB000A84DE3 /* Assets.xcassets */; };
 		BECE6ED52B5F0FB000A84DE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BECE6ED32B5F0FB000A84DE3 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		702B1A4C0FB1B5720BD7EF7A /* Pods_Travel_Memory_Journal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Travel_Memory_Journal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79ACD0649A09DB96D1E6E7C0 /* Pods-Travel Memory Journal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Travel Memory Journal.release.xcconfig"; path = "Target Support Files/Pods-Travel Memory Journal/Pods-Travel Memory Journal.release.xcconfig"; sourceTree = "<group>"; };
+		BE4DEF9B2B60380C00FD2606 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		BE4DEF9D2B60A53400FD2606 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		BE4EE8B52B71613F00082901 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		BE4EE8B72B71617A00082901 /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
+		BE8B11792B6BFC2200D64E84 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		BEBD7D852B6FBCBA00DBF378 /* TitleStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackView.swift; sourceTree = "<group>"; };
+		BEC938352B725686000D248C /* CarouselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselTableViewCell.swift; sourceTree = "<group>"; };
+		BECD165D2B66F26E000F03D2 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
+		BECD165F2B66F302000F03D2 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		BECE6EC52B5F0FAF00A84DE3 /* Travel Memory Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Travel Memory Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BECE6EC82B5F0FAF00A84DE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BECE6ECA2B5F0FAF00A84DE3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BECE6ECC2B5F0FAF00A84DE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BECE6ECF2B5F0FAF00A84DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BECE6ECC2B5F0FAF00A84DE3 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		BECE6ED12B5F0FB000A84DE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BECE6ED42B5F0FB000A84DE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BECE6ED62B5F0FB000A84DE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F503C741B798F6C28F4B5FF5 /* Pods-Travel Memory Journal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Travel Memory Journal.debug.xcconfig"; path = "Target Support Files/Pods-Travel Memory Journal/Pods-Travel Memory Journal.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +51,70 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				403D785416EB731B5CA01CFA /* Pods_Travel_Memory_Journal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE2059D32B84CA1E00A3686D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BECE6ECA2B5F0FAF00A84DE3 /* SceneDelegate.swift */,
+				BECE6EC82B5F0FAF00A84DE3 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		BE2059D42B84CA2A00A3686D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BECD165F2B66F302000F03D2 /* CollectionViewCell.swift */,
+				BECD165D2B66F26E000F03D2 /* CollectionTableViewCell.swift */,
+				BEC938352B725686000D248C /* CarouselTableViewCell.swift */,
+				BECE6ED32B5F0FB000A84DE3 /* LaunchScreen.storyboard */,
+				BE4EE8B52B71613F00082901 /* CarouselView.swift */,
+				BEBD7D852B6FBCBA00DBF378 /* TitleStackView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BE2059D72B84CA6F00A3686D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BECE6ED62B5F0FB000A84DE3 /* Info.plist */,
+				BECE6ED12B5F0FB000A84DE3 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BE2059D82B84CAA200A3686D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BE4EE8B72B71617A00082901 /* CarouselCell.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BE2059D92B84CAB500A3686D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BE8B11792B6BFC2200D64E84 /* MapViewController.swift */,
+				BECE6ECC2B5F0FAF00A84DE3 /* TutorialViewController.swift */,
+				BE4DEF9D2B60A53400FD2606 /* AddViewController.swift */,
+				BE4DEF9B2B60380C00FD2606 /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		BECE6EBC2B5F0FAF00A84DE3 = {
 			isa = PBXGroup;
 			children = (
 				BECE6EC72B5F0FAF00A84DE3 /* Travel Memory Journal */,
 				BECE6EC62B5F0FAF00A84DE3 /* Products */,
+				FCC69C5CED1B8F71705A7F7C /* Pods */,
+				F89FAB4D953D5427E9810009 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +129,30 @@
 		BECE6EC72B5F0FAF00A84DE3 /* Travel Memory Journal */ = {
 			isa = PBXGroup;
 			children = (
-				BECE6EC82B5F0FAF00A84DE3 /* AppDelegate.swift */,
-				BECE6ECA2B5F0FAF00A84DE3 /* SceneDelegate.swift */,
-				BECE6ECC2B5F0FAF00A84DE3 /* ViewController.swift */,
-				BECE6ECE2B5F0FAF00A84DE3 /* Main.storyboard */,
-				BECE6ED12B5F0FB000A84DE3 /* Assets.xcassets */,
-				BECE6ED32B5F0FB000A84DE3 /* LaunchScreen.storyboard */,
-				BECE6ED62B5F0FB000A84DE3 /* Info.plist */,
+				BE2059D92B84CAB500A3686D /* Controllers */,
+				BE2059D82B84CAA200A3686D /* Models */,
+				BE2059D42B84CA2A00A3686D /* Views */,
+				BE2059D32B84CA1E00A3686D /* App */,
+				BE2059D72B84CA6F00A3686D /* Resources */,
 			);
 			path = "Travel Memory Journal";
+			sourceTree = "<group>";
+		};
+		F89FAB4D953D5427E9810009 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				702B1A4C0FB1B5720BD7EF7A /* Pods_Travel_Memory_Journal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCC69C5CED1B8F71705A7F7C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F503C741B798F6C28F4B5FF5 /* Pods-Travel Memory Journal.debug.xcconfig */,
+				79ACD0649A09DB96D1E6E7C0 /* Pods-Travel Memory Journal.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +162,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BECE6ED92B5F0FB000A84DE3 /* Build configuration list for PBXNativeTarget "Travel Memory Journal" */;
 			buildPhases = (
+				596F1B1BEEBCF8781D744AD0 /* [CP] Check Pods Manifest.lock */,
 				BECE6EC12B5F0FAF00A84DE3 /* Sources */,
 				BECE6EC22B5F0FAF00A84DE3 /* Frameworks */,
 				BECE6EC32B5F0FAF00A84DE3 /* Resources */,
+				CAA07A243E4F8F9D3440A03A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,34 +217,76 @@
 			files = (
 				BECE6ED52B5F0FB000A84DE3 /* LaunchScreen.storyboard in Resources */,
 				BECE6ED22B5F0FB000A84DE3 /* Assets.xcassets in Resources */,
-				BECE6ED02B5F0FAF00A84DE3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		596F1B1BEEBCF8781D744AD0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Travel Memory Journal-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CAA07A243E4F8F9D3440A03A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Travel Memory Journal/Pods-Travel Memory Journal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Travel Memory Journal/Pods-Travel Memory Journal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Travel Memory Journal/Pods-Travel Memory Journal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BECE6EC12B5F0FAF00A84DE3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BECE6ECD2B5F0FAF00A84DE3 /* ViewController.swift in Sources */,
+				BE4EE8B62B71613F00082901 /* CarouselView.swift in Sources */,
+				BE4DEF9E2B60A53400FD2606 /* AddViewController.swift in Sources */,
+				BE4EE8B82B71617A00082901 /* CarouselCell.swift in Sources */,
+				BECD165E2B66F26E000F03D2 /* CollectionTableViewCell.swift in Sources */,
+				BECE6ECD2B5F0FAF00A84DE3 /* TutorialViewController.swift in Sources */,
+				BECD16602B66F302000F03D2 /* CollectionViewCell.swift in Sources */,
+				BEBD7D862B6FBCBA00DBF378 /* TitleStackView.swift in Sources */,
+				BEC938362B725686000D248C /* CarouselTableViewCell.swift in Sources */,
 				BECE6EC92B5F0FAF00A84DE3 /* AppDelegate.swift in Sources */,
 				BECE6ECB2B5F0FAF00A84DE3 /* SceneDelegate.swift in Sources */,
+				BE4DEF9C2B60380C00FD2606 /* MainViewController.swift in Sources */,
+				BE8B117A2B6BFC2200D64E84 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BECE6ECE2B5F0FAF00A84DE3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BECE6ECF2B5F0FAF00A84DE3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BECE6ED32B5F0FB000A84DE3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -203,7 +335,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -266,7 +398,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -287,6 +419,7 @@
 		};
 		BECE6EDA2B5F0FB000A84DE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F503C741B798F6C28F4B5FF5 /* Pods-Travel Memory Journal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,12 +427,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L6R5Q4T23R;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Travel Memory Journal/Info.plist";
+				INFOPLIST_FILE = "Travel Memory Journal/Resources/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Application needs permission for camera usage in order to continue processing.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Do you allow the app to use your location?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Application needs permission for photo library usage in order to continue processing.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,6 +449,7 @@
 		};
 		BECE6EDB2B5F0FB000A84DE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79ACD0649A09DB96D1E6E7C0 /* Pods-Travel Memory Journal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -322,12 +457,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L6R5Q4T23R;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Travel Memory Journal/Info.plist";
+				INFOPLIST_FILE = "Travel Memory Journal/Resources/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Application needs permission for camera usage in order to continue processing.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Do you allow the app to use your location?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Application needs permission for photo library usage in order to continue processing.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

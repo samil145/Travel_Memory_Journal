@@ -13,8 +13,6 @@ class TitleStackView: UIStackView {
         commonInit()
     }
     
-    
-    
     required init(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
@@ -32,6 +30,8 @@ class TitleStackView: UIStackView {
         label.font = UIFont.systemFont(ofSize: UIFont.preferredFont(forTextStyle:.largeTitle).pointSize - 5, weight: .heavy)
         label.text = "Travel Memory Journal"
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.textColor = .white
+        label.tintColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -46,11 +46,11 @@ class TitleStackView: UIStackView {
 
         button.setImage(largeBoldDoc, for: .normal)
         
-        button.imageView?.tintColor = .label
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
         button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        
+        button.imageView?.tintColor = .white
         
         return button
     }()

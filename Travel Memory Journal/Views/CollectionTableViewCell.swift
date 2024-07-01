@@ -20,6 +20,8 @@ class CollectionTableViewCell: UITableViewCell, AddViewControllerDelegate {
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .backgroundMain
         return collectionView
     }()
     
@@ -30,6 +32,7 @@ class CollectionTableViewCell: UITableViewCell, AddViewControllerDelegate {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.frame = CGRect(x: contentView.frame.origin.x+10, y: contentView.frame.origin.y, width: contentView.bounds.width-20, height: contentView.bounds.height)
+        contentView.backgroundColor = .backgroundMain
     }
     
     
@@ -40,6 +43,7 @@ class CollectionTableViewCell: UITableViewCell, AddViewControllerDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.frame = CGRect(x: contentView.frame.origin.x+10, y: contentView.frame.origin.y, width: contentView.bounds.width-20, height: contentView.bounds.height)
+        contentView.backgroundColor = .backgroundMain
         //collectionView.frame = contentView.bounds
     }
     
