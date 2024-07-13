@@ -38,7 +38,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         let button = UIButton(type: .custom)
         button.backgroundColor = UIColor(rgb: 0x1C1C1C)
-        button.setImage(UIImage(systemName: "map"), for: .normal)
+        button.setImage(UIImage(systemName: "map" ,withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default)), for: .normal)
         button.imageView?.tintColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -48,7 +48,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         let button = UIButton(type: .custom)
         button.backgroundColor = UIColor(rgb: 0x1C1C1C)
-        button.setImage(UIImage(systemName: "location"), for: .normal)
+        button.setImage(UIImage(systemName: "mappin.and.ellipse", withConfiguration: UIImage.SymbolConfiguration(pointSize: 21, weight: .regular, scale: .default)), for: .normal)
         button.imageView?.tintColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

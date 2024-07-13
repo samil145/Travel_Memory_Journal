@@ -19,6 +19,24 @@ class TutorialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //UIApplication.shared.windows.first?.layer.speed = 0.1
+        
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor : UIColor.clear
+            ]
+            appearance.backgroundColor = .clear
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        } else {
+            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController?.navigationBar.shadowImage = UIImage()
+            navigationController?.navigationBar.isTranslucent = true
+        }
+        
         // Do any additional setup after loading the view.
         
         // Background Image
@@ -100,7 +118,39 @@ class TutorialViewController: UIViewController {
     @objc func getStartButtonTapped()
     {
         UserDefaults.standard.set(true, forKey: "notFirstInApp")
+        
+        let transition:CATransition = CATransition()
+        transition.duration = 0.8
+        transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+        transition.type = CATransitionType.push
+        transition.subtype = CATransitionSubtype.fromRight
+        self.navigationController?.view.layer.add(transition, forKey: kCATransition)
+        
+        
         navigationController?.pushViewController(MainViewController(), animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor : UIColor.white
+            ]
+            appearance.backgroundColor = UIColor.backgroundMain
+            appearance.shadowColor = nil
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        } else {
+            navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+            navigationController?.navigationBar.shadowImage = nil
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.barTintColor = UIColor.backgroundMain
+            navigationController?.navigationBar.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor : UIColor.white
+            ]
+        }
     }
 }
 
