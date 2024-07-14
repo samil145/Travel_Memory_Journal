@@ -54,4 +54,5 @@
 ## Technical Background
 - **Travel Memory Journal** is made with **"UIKit"** framework.
 - [**ImagePicker**](https://github.com/hyperoslo/ImagePicker) by **hyperoslo** is used for image picker view and controller.
+- **Podfile** by **CocoaPods** is used for adding **ImagaPicker** library which is mentioned in previous statement.
 - **MVC** is applied.
